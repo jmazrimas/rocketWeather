@@ -15,7 +15,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './scripts/testModule/testModule.spec.js'
+      './node_modules/angular/angular.js',
+      './node_modules/angular-ui-router/release/angular-ui-router.js',
+      './node_modules/angular-mocks/angular-mocks.js',
+      './scripts/testModule/testModule.spec.js',
+      './scripts/rocketWeather.js',
+      './scripts/rocketWeatherController.js',
+      './scripts/rocketWeatherController.spec.js'
     ],
 
 
@@ -60,7 +66,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
