@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/jmazrimas/rocketWeather/issues"
   },
-  "homepage": "https://github.com/jmazrimas/rocketWeather#readme"
+  "homepage": "https://github.com/jmazrimas/rocketWeather#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "angular": "^1.6.6",
+    "angular-mocks": "^1.6.6",
+    "angular-ui-router": "^1.0.3",
+    "jasmine-core": "^2.8.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0"
+  }
 }
