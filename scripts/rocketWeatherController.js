@@ -25,12 +25,22 @@ angular.module("rocketWeather")
     )
 
     var getWeather = function(location) {
-      weatherFactory.getWeather(location.latitude, location.longitude).then(
+      weatherFactory.getCurrentWeather(location.latitude, location.longitude).then(
         function(response){
           $scope.currentWeatherData = weatherFactory.cleanData(response.data);
         },
         function(response){
-          $scope.error = "Error getting weather data."
+          $scope.error = "Error getting current weather data."
+        }
+      )
+
+      weatherFactory.getFiveDayWeather(location.latitude, location.longitude).then(
+        function(response){
+          $scope.fiveDayWeatherData = weatherFactory.cleanFiveDay(response.data.list);
+          console.log('fiveday', $scope.fiveDayWeatherData)
+        },
+        function(response){
+          $scope.error = "Error getting 5-day weather data."
         }
       )
     }
