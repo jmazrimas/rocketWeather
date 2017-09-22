@@ -27,16 +27,21 @@
           <h3>Lat: {{location.latitude}}</h3>
         </div>
         <div ng-if="currentWeatherData">
-          <div>Temp: {{currentWeatherData.temp}}</div>
-          <div>High: {{currentWeatherData.tempHigh}}</div>
-          <div>Low: {{currentWeatherData.tempLow}}</div>
+          <div>Temp: {{currentWeatherData.temp}}&deg;F</div>
+          <div>High: {{currentWeatherData.tempHigh}}&deg;F</div>
+          <div>Low: {{currentWeatherData.tempLow}}&deg;F</div>
           <div>Humidity: {{currentWeatherData.humidity}}</div>
           <div>Wind Speed: {{currentWeatherData.windSpeed}}</div>
         </div>
 
         <div ng-if="fiveDayWeatherData">
           <div ng-repeat="(dayDate, dayData) in fiveDayWeatherData">
-            Day: {{dayDate}}
+            <div class="day">{{dayDate}}</div>
+            <div ng-repeat="threeHour in dayData">
+              {{threeHour.dateTime.toLocaleTimeString()}}
+              {{threeHour.temp}}&deg;F
+              {{threeHour.humidity}}&#37;
+            </div>
           </div>
         </div>
 
