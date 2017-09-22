@@ -12,20 +12,27 @@ angular.module("rocketWeather")
 
     locationFactory.getUserLocation().then(
       function(location){
-        console.log(location)
         $scope.locationSearchInProgress = false;
         $scope.location = location;
+        getWeather($scope.location);
       },
       function(error){
         $scope.locationSearchInProgress = false;
         $scope.location = defaultLocation;
         $scope.error=error;
+        getWeather($scope.location);
       }
     )
 
-    weatherFactory.getWeather(41.885383, -87.644481).then(
-      function(result){ console.log('good', result)},
-      function(result){ console.log('bad', result)}
-    )
+    var getWeather = function(location) {
+      weatherFactory.getWeather(location.latitude, location.longitude).then(
+        function(response){
+          $scope.currentWeatherData = weatherFactory.cleanData(response.data);
+        },
+        function(response){
+          $scope.error = "Error getting weather data."
+        }
+      )
+    }
 
 });

@@ -14,16 +14,26 @@
     <div ng-app="rocketWeather" ng-controller="rocketWeatherController">
       <div ui-view>
         <h1>rocketWeather</h1>
+
         <div ng-if="error">
           <h3>{{error}}</h3>
         </div>
+
+
         <div ng-if="locationSearchInProgress">
           <h3>rocketWeather is trying to get your location...</h3>
         </div>
-        <div ng-if="!location.error && !locationSearchInProgress">
+        <div ng-if="!locationSearchInProgress">
           <h3>Lat: {{location.latitude}}</h3>
-          <h3>Long: {{location.longitude}}</h3>
         </div>
+        <div ng-if="currentWeatherData">
+          <div>Temp: {{currentWeatherData.temp}}</div>
+          <div>High: {{currentWeatherData.tempHigh}}</div>
+          <div>Low: {{currentWeatherData.tempLow}}</div>
+          <div>Humidity: {{currentWeatherData.humidity}}</div>
+          <div>Wind Speed: {{currentWeatherData.windSpeed}}</div>
+        </div>
+
       </div>
     </div>
   </body>
