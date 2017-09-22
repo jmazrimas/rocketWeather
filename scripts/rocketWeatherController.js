@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module("rocketWeather")
-.controller("rocketWeatherController", function($scope, $http, locationFactory) {
+.controller("rocketWeatherController", function($scope, $http, locationFactory, weatherFactory) {
 
     $scope.testFunc = function() {
       return 999;
@@ -21,6 +21,11 @@ angular.module("rocketWeather")
         $scope.location = defaultLocation;
         $scope.error=error;
       }
+    )
+
+    weatherFactory.getWeather(41.885383, -87.644481).then(
+      function(result){ console.log('good', result)},
+      function(result){ console.log('bad', result)}
     )
 
 });
