@@ -3,11 +3,11 @@ angular.module("rocketWeather")
 
     var weatherFactory = {};
 
-    weatherFactory.getCurrentWeather = function(lat, long) {
+    weatherFactory.getCurrentWeather = function(key, lat, long) {
       var params = {
         lat: lat,
         lon: long,
-        APPID: "d19efd67d9de2274a25488678f271955",
+        APPID: key,
         units: "Imperial"
       }
       return $http({
@@ -17,11 +17,11 @@ angular.module("rocketWeather")
        });
     }
 
-    weatherFactory.getFiveDayWeather = function(lat, long) {
+    weatherFactory.getFiveDayWeather = function(key, lat, long) {
       var params = {
         lat: lat,
         lon: long,
-        APPID: "d19efd67d9de2274a25488678f271955",
+        APPID: key,
         units: "Imperial"
       }
       return $http({
