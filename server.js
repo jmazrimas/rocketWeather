@@ -7,5 +7,5 @@ app.use(express.static(path.join(__dirname)));
 
 var server = app.listen(app.get('port'), function() {
   var port = server.address().port;
-  console.log('update listening on ' + port);
+  console.log('listening on ' + port);
 });
