@@ -1,0 +1,42 @@
+.header {
+  padding: 20px 0px 2px;
+  background: #2A2D36;
+  color: white;
+}
+
+.message-center {
+  padding: 5px 0px;
+  min-height: 40px;
+  background: #DD4814;
+}
+
+.current-weather h1, .five-day h1{
+  margin-top: 15px;
+  font-weight: lighter;
+}
+
+.weather-stats {
+  margin: 15px 0px;
+}
+
+.five-day-date {
+  color: black;
+  font-weight: 300;
+}
+
+.five-day .card {
+  border-width: 1px 0px;
+}
+
+.five-day .card-header {
+  background-color: white;
+  padding: .75rem 0;
+}
+
+.five-day .collapse .col-4 {
+  margin: 3px 0px;
+}
+
+.stat-header {
+  font-weight: bold;
+}

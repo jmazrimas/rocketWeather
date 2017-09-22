@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Rocket Weather</title>
+    <link rel="stylesheet" href="/css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
     <script src="scripts/rocketWeather.js"></script>
     <script src="scripts/rocketWeatherController.js"></script>
     <script src="scripts/locationFactory.js"></script>
@@ -13,38 +18,99 @@
   <body>
     <div ng-app="rocketWeather" ng-controller="rocketWeatherController">
       <div ui-view>
-        <h1>rocketWeather</h1>
-
-        <div ng-if="error">
-          <h3>{{error}}</h3>
+        <div class="header">
+          <h1 class="container">rocketWeather</h1>
         </div>
-
-
-        <div ng-if="locationSearchInProgress">
-          <h3>rocketWeather is trying to get your location...</h3>
-        </div>
-        <div ng-if="!locationSearchInProgress">
-          <h3>Lat: {{location.latitude}}</h3>
-        </div>
-        <div ng-if="currentWeatherData">
-          <div>Temp: {{currentWeatherData.temp}}&deg;F</div>
-          <div>High: {{currentWeatherData.tempHigh}}&deg;F</div>
-          <div>Low: {{currentWeatherData.tempLow}}&deg;F</div>
-          <div>Humidity: {{currentWeatherData.humidity}}</div>
-          <div>Wind Speed: {{currentWeatherData.windSpeed}}</div>
-        </div>
-
-        <div ng-if="fiveDayWeatherData">
-          <div ng-repeat="(dayDate, dayData) in fiveDayWeatherData">
-            <div class="day">{{dayDate}}</div>
-            <div ng-repeat="threeHour in dayData">
-              {{threeHour.dateTime.toLocaleTimeString()}}
-              {{threeHour.temp}}&deg;F
-              {{threeHour.humidity}}&#37;
+        <div class="message-center">
+          <div class="container">
+            <div class="row">
+              <div class="col" ng-if="locationSearchInProgress">rocketWeather is trying to get your location...</div>
+              <div class="col" ng-if="error">{{error}}</div>
             </div>
           </div>
         </div>
 
+        <div class="container">
+
+          <div ng-if="currentWeatherData" class="row align-items-start current-weather">
+            <div class="col">
+              <h1>Current</h1>
+            </div>
+            <div class="col weather-stats">
+              <div>Temp: {{currentWeatherData.temp}}&deg;F</div>
+              <div>High: {{currentWeatherData.tempHigh}}&deg;F</div>
+              <div>Low: {{currentWeatherData.tempLow}}&deg;F</div>
+              <div>Humidity: {{currentWeatherData.humidity}}</div>
+              <div>Wind Speed: {{currentWeatherData.windSpeed}}</div>
+            </div>
+          </div>
+
+          <!-- <div ng-if="currentWeatherData">
+            <div>Temp: {{currentWeatherData.temp}}&deg;F</div>
+            <div>High: {{currentWeatherData.tempHigh}}&deg;F</div>
+            <div>Low: {{currentWeatherData.tempLow}}&deg;F</div>
+            <div>Humidity: {{currentWeatherData.humidity}}</div>
+            <div>Wind Speed: {{currentWeatherData.windSpeed}}</div>
+          </div> -->
+
+          <div class="five-day" ng-if="fiveDayWeatherData">
+            <!-- <div ng-repeat="(dayDate, dayData) in fiveDayWeatherData">
+              <div class="day">{{dayDate}}</div>
+              <div ng-repeat="threeHour in dayData">
+                {{threeHour.dateTime.toLocaleTimeString()}}
+                {{threeHour.temp}}&deg;F
+                {{threeHour.humidity}}&#37;
+              </div>
+            </div> -->
+
+            <!-- <div class="card-deck">
+              <div class="card" ng-repeat="(dayDate, dayData) in fiveDayWeatherData">
+                <div class="card-block">
+                  <h4 class="card-title">{{dayDate}}</h4>
+                  <p ng-repeat="threeHour in dayData" class="card-text">
+                    {{threeHour.dateTime.toLocaleTimeString()}}
+                    {{threeHour.temp}}&deg;F
+                    {{threeHour.humidity}}&#37;
+                  </p>
+                </div>
+              </div>
+            </div> -->
+
+            <h1>Five Day</h1>
+            <div id="accordion" role="tablist" aria-multiselectable="true">
+              <div ng-repeat="(dayDate, dayData) in fiveDayWeatherData track by $index" class="card">
+                <div class="card-header" role="tab" id="heading{{$index}}">
+                  <h5 class="mb-0">
+                    <a class="five-day-date" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
+                      {{dayDate}}
+                    </a>
+                  </h5>
+                </div>
+
+                <div id="collapse{{$index}}" class="collapse" role="tabpanel" aria-labelledby="heading{{$index}}">
+                  <div class="row stat-header">
+                    <div class="col-4">Time</div>
+                    <div class="col-4">Temp</div>
+                    <div class="col-4">Humidity</div>
+                  </div>
+                  <div class="row" ng-repeat="threeHour in dayData">
+                    <div class="col-4">{{threeHour.dateTime.toLocaleTimeString()}}</div>
+                    <div class="col-4">{{threeHour.temp}}&deg;F</div>
+                    <div class="col-4">{{threeHour.humidity}}&#37;</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+        </div>
       </div>
     </div>
   </body>
