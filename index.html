@@ -7,11 +7,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
     <script src="scripts/rocketWeather.js"></script>
     <script src="scripts/rocketWeatherController.js"></script>
+    <script src="scripts/locationFactory.js"></script>
   </head>
   <body>
     <div ng-app="rocketWeather" ng-controller="rocketWeatherController">
       <div ui-view>
-        {{testString}}
+        <h1>rocketWeather</h1>
+        <div ng-if="error">
+          <h3>{{error}}</h3>
+        </div>
+        <div ng-if="locationSearchInProgress">
+          <h3>rocketWeather is trying to get your location...</h3>
+        </div>
+        <div ng-if="!location.error && !locationSearchInProgress">
+          <h3>Lat: {{location.latitude}}</h3>
+          <h3>Long: {{location.longitude}}</h3>
+        </div>
       </div>
     </div>
   </body>
