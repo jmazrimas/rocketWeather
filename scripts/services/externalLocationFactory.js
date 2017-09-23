@@ -13,7 +13,7 @@ angular.module("rocketWeather")
          var params = {key: response.data.googleMaps}
 
          if (searchParams.latlng) {
-           params.latlng = latlng.lat+","+latlng.long
+           params.latlng = searchParams.latlng.latitude+","+searchParams.latlng.longitude
          } else {
            params.address = searchParams.searchTerm
          }

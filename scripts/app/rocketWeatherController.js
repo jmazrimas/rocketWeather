@@ -9,22 +9,22 @@ angular.module("rocketWeather")
 
     var defaultLocation = {latitude: 41.885383, longitude: -87.644481}
     $scope.locationSearchInProgress = true;
-    
-       locationFactory.getUserLocation().then(
-         function(location){
-           $scope.locationSearchInProgress = false;
-           $scope.location = location;
-           getWeather($scope.location);
-         },
-         function(error){
-           $scope.locationSearchInProgress = false;
-           $scope.location = defaultLocation;
-           $scope.error=error;
-           getWeather($scope.location);
-         }
-       )
 
-
+     locationFactory.getUserLocation().then(
+       function(location){
+         $scope.locationSearchInProgress = false;
+        //  $scope.location = location;
+        //  getWeather($scope.location);
+         $scope.setLocationAndGetWeather(null, location);
+       },
+       function(error){
+         $scope.locationSearchInProgress = false;
+        //  $scope.location = defaultLocation;
+        //  $scope.error=error;
+        //  getWeather($scope.location);
+         $scope.setLocationAndGetWeather(null, defaultLocation);
+       }
+     )
 
     var getWeather = function(location) {
 
@@ -48,8 +48,10 @@ angular.module("rocketWeather")
     }
 
     $scope.setLocationAndGetWeather = function(search, latLong) {
-      externalLocationFactory.findNewLocation({searchTerm: search, latlng}).then(function(response){
+      externalLocationFactory.findNewLocation({searchTerm: search, latlng: latLong}).then(function(response){
+        // response = {name: str, lat: int, long: int}
         $scope.selectedLocation = response;
+        getWeather({latitude: response.lat, longitude: response.long});
       })
     }
 
