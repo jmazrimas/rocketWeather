@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-    <script src="scripts/rocketWeather.js"></script>
-    <script src="scripts/rocketWeatherController.js"></script>
-    <script src="scripts/locationFactory.js"></script>
-    <script src="scripts/weatherFactory.js"></script>
+    <script src="scripts/app/rocketWeather.js"></script>
+    <script src="scripts/app/rocketWeatherController.js"></script>
+    <script src="scripts/services/locationFactory.js"></script>
+    <script src="scripts/services/weatherFactory.js"></script>
+    <script src="scripts/services/externalLocationFactory.js"></script>
   </head>
   <body>
     <div ng-app="rocketWeather" ng-controller="rocketWeatherController">
@@ -25,7 +26,12 @@
         <div class="message-center">
           <div class="container">
             <div class="row">
-              <div class="col" ng-if="locationSearchInProgress">rocketWeather is trying to get your location...</div>
+              <div class="col" ng-if="locationSearchInProgress">Trying to get your location...</div>
+              <div class="col" ng-if="selectedLocation">Weather for: {{selectedLocation.name}}</div>
+              <div style="text-align: right" class="col">
+                <input type="text" ng-model="newLocationSearch"placeholder="New Location"></input>
+                <button ng-click="setLocationAndGetWeather(newLocationSearch)">Update</button>
+              </div>
               <div class="col" ng-if="error">{{error}}</div>
             </div>
           </div>

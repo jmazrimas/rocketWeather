@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module("rocketWeather")
-.controller("rocketWeatherController", function($scope, $http, locationFactory, weatherFactory) {
+.controller("rocketWeatherController", function($scope, $http, locationFactory, weatherFactory, externalLocationFactory) {
 
     $scope.testFunc = function() {
       return 999;
@@ -34,6 +34,7 @@ angular.module("rocketWeather")
 
 
     var getWeather = function(owKey, location) {
+
       weatherFactory.getCurrentWeather(owKey, location.latitude, location.longitude).then(
         function(response){
           $scope.currentWeatherData = weatherFactory.cleanData(response.data);
@@ -51,6 +52,12 @@ angular.module("rocketWeather")
           $scope.error = "Error getting 5-day weather data."
         }
       )
+    }
+
+    $scope.setLocationAndGetWeather = function(search) {
+      externalLocationFactory.findNewLocation({searchTerm: search}).then(function(response){
+        $scope.selectedLocation = response;
+      })
     }
 
 });
