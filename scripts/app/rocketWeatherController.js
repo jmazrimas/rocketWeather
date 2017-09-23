@@ -9,33 +9,26 @@ angular.module("rocketWeather")
 
     var defaultLocation = {latitude: 41.885383, longitude: -87.644481}
     $scope.locationSearchInProgress = true;
-
-    $http({
-        url: '/keys.json',
-        method: "GET"
-     }).then(function(response){
-
-       var owKey = response.data.openweathermap
-
+    
        locationFactory.getUserLocation().then(
          function(location){
            $scope.locationSearchInProgress = false;
            $scope.location = location;
-           getWeather(owKey, $scope.location);
+           getWeather($scope.location);
          },
          function(error){
            $scope.locationSearchInProgress = false;
            $scope.location = defaultLocation;
            $scope.error=error;
-           getWeather(owKey, $scope.location);
+           getWeather($scope.location);
          }
        )
-     })
 
 
-    var getWeather = function(owKey, location) {
 
-      weatherFactory.getCurrentWeather(owKey, location.latitude, location.longitude).then(
+    var getWeather = function(location) {
+
+      weatherFactory.getWeather(location.latitude, location.longitude, true).then(
         function(response){
           $scope.currentWeatherData = weatherFactory.cleanData(response.data);
         },
@@ -44,7 +37,7 @@ angular.module("rocketWeather")
         }
       )
 
-      weatherFactory.getFiveDayWeather(owKey, location.latitude, location.longitude).then(
+      weatherFactory.getWeather(location.latitude, location.longitude).then(
         function(response){
           $scope.fiveDayWeatherData = weatherFactory.cleanFiveDay(response.data.list);
         },
@@ -54,8 +47,8 @@ angular.module("rocketWeather")
       )
     }
 
-    $scope.setLocationAndGetWeather = function(search) {
-      externalLocationFactory.findNewLocation({searchTerm: search}).then(function(response){
+    $scope.setLocationAndGetWeather = function(search, latLong) {
+      externalLocationFactory.findNewLocation({searchTerm: search, latlng}).then(function(response){
         $scope.selectedLocation = response;
       })
     }
