@@ -3,32 +3,29 @@ angular.module("rocketWeather")
 
     var weatherFactory = {};
 
-    weatherFactory.getCurrentWeather = function(key, lat, long) {
-      var params = {
-        lat: lat,
-        lon: long,
-        APPID: key,
-        units: "Imperial"
-      }
+    weatherFactory.getWeather = function(lat, long, current) {
       return $http({
-          url: 'http://api.openweathermap.org/data/2.5/weather',
-          method: "GET",
-          params: params
-       });
-    }
+          url: '/keys.json',
+          method: "GET"
+       }).then(function(response){
+         var params = {
+           lat: lat,
+           lon: long,
+           APPID: response.data.openweathermap,
+           units: "Imperial"
+         }
+         if (current) {
+           var url = 'http://api.openweathermap.org/data/2.5/weather';
+         } else {
+           var url = 'http://api.openweathermap.org/data/2.5/forecast';
+         }
+         return $http({
+           url: url,
+           method: "GET",
+           params: params
+         });
+       })
 
-    weatherFactory.getFiveDayWeather = function(key, lat, long) {
-      var params = {
-        lat: lat,
-        lon: long,
-        APPID: key,
-        units: "Imperial"
-      }
-      return $http({
-          url: 'http://api.openweathermap.org/data/2.5/forecast',
-          method: "GET",
-          params: params
-       });
     }
 
     weatherFactory.cleanData = function(weatherData) {
