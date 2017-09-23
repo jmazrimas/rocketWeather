@@ -15,8 +15,13 @@
   font-weight: lighter;
 }
 
+.current-weather .col {
+  padding: 0px;
+}
+
 .weather-stats {
-  margin: 15px 0px;
+  font-size: 1.25em;
+  font-weight: 300;
 }
 
 .five-day-date {
@@ -25,7 +30,7 @@
 }
 
 .five-day .card {
-  border-width: 1px 0px;
+  border-width: 0px;
 }
 
 .five-day .card-header {

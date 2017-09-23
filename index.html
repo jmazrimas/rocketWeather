@@ -33,50 +33,22 @@
 
         <div class="container">
 
-          <div ng-if="currentWeatherData" class="row align-items-start current-weather">
+          <div class="row align-items-start">
+
+          <div ng-if="currentWeatherData" class="col-sm-6 current-weather">
             <div class="col">
               <h1>Current</h1>
             </div>
             <div class="col weather-stats">
-              <div>Temp: {{currentWeatherData.temp}}&deg;F</div>
-              <div>High: {{currentWeatherData.tempHigh}}&deg;F</div>
-              <div>Low: {{currentWeatherData.tempLow}}&deg;F</div>
-              <div>Humidity: {{currentWeatherData.humidity}}</div>
-              <div>Wind Speed: {{currentWeatherData.windSpeed}}</div>
+              <div><b>Temp:</b> {{currentWeatherData.temp}}&deg;F</div>
+              <div><b>High:</b> {{currentWeatherData.tempHigh}}&deg;F</div>
+              <div><b>Low:</b> {{currentWeatherData.tempLow}}&deg;F</div>
+              <div><b>Humidity:</b> {{currentWeatherData.humidity}}</div>
+              <div><b>Wind Speed:</b> {{currentWeatherData.windSpeed}}</div>
             </div>
           </div>
 
-          <!-- <div ng-if="currentWeatherData">
-            <div>Temp: {{currentWeatherData.temp}}&deg;F</div>
-            <div>High: {{currentWeatherData.tempHigh}}&deg;F</div>
-            <div>Low: {{currentWeatherData.tempLow}}&deg;F</div>
-            <div>Humidity: {{currentWeatherData.humidity}}</div>
-            <div>Wind Speed: {{currentWeatherData.windSpeed}}</div>
-          </div> -->
-
-          <div class="five-day" ng-if="fiveDayWeatherData">
-            <!-- <div ng-repeat="(dayDate, dayData) in fiveDayWeatherData">
-              <div class="day">{{dayDate}}</div>
-              <div ng-repeat="threeHour in dayData">
-                {{threeHour.dateTime.toLocaleTimeString()}}
-                {{threeHour.temp}}&deg;F
-                {{threeHour.humidity}}&#37;
-              </div>
-            </div> -->
-
-            <!-- <div class="card-deck">
-              <div class="card" ng-repeat="(dayDate, dayData) in fiveDayWeatherData">
-                <div class="card-block">
-                  <h4 class="card-title">{{dayDate}}</h4>
-                  <p ng-repeat="threeHour in dayData" class="card-text">
-                    {{threeHour.dateTime.toLocaleTimeString()}}
-                    {{threeHour.temp}}&deg;F
-                    {{threeHour.humidity}}&#37;
-                  </p>
-                </div>
-              </div>
-            </div> -->
-
+          <div class="col-sm-6 five-day" ng-if="fiveDayWeatherData">
             <h1>Five Day</h1>
             <div id="accordion" role="tablist" aria-multiselectable="true">
               <div ng-repeat="(dayDate, dayData) in fiveDayWeatherData track by $index" class="card">
@@ -104,13 +76,10 @@
 
             </div>
 
-
-
-
-
-
-
           </div>
+
+        </div>
+
         </div>
       </div>
     </div>
