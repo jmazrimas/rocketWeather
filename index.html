@@ -25,14 +25,23 @@
         </div>
         <div class="message-center">
           <div class="container">
-            <div class="row">
-              <div class="col" ng-if="locationSearchInProgress">Trying to get your location...</div>
-              <div class="col" ng-if="selectedLocation">Weather for: {{selectedLocation.name}}</div>
-              <div style="text-align: right" class="col">
-                <input type="text" ng-model="newLocationSearch"placeholder="New Location"></input>
-                <button ng-click="setLocationAndGetWeather(newLocationSearch)">Update</button>
-              </div>
+            <div class="row justify-content-between">
+              <!-- <div class="col" ng-if="locationSearchInProgress">Trying to get your location...</div>
               <div class="col" ng-if="error">{{error}}</div>
+              <div class="col" ng-if="selectedLocation">Weather for: {{selectedLocation.name}}</div> -->
+              <div class="col">
+                <div ng-if="locationSearchInProgress">Trying to get your location...</div>
+                <div ng-if="error">{{error}}</div>
+                <div ng-if="selectedLocation">Weather for: {{selectedLocation.name}}</div>
+              </div>
+              <div class="col" style="padding-right: 0px;">
+                <div class="row">
+                  <input style="width: 75%;" ng-model="newLocationSearch" type="text" class="col-md-auto form-control" id="newLocation" placeholder="New Location">
+                  <button style="background-color: #2A2D36; color: white;" ng-click="setLocationAndGetWeather(newLocationSearch)" type="submit" class="col-md-auto btn">Update</button>
+                </div>
+              </div>
+              <!-- <div class="col" style="padding-left: 0px;">
+              </div> -->
             </div>
           </div>
         </div>
