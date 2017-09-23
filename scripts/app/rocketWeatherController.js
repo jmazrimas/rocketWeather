@@ -13,15 +13,11 @@ angular.module("rocketWeather")
      locationFactory.getUserLocation().then(
        function(location){
          $scope.locationSearchInProgress = false;
-        //  $scope.location = location;
-        //  getWeather($scope.location);
          $scope.setLocationAndGetWeather(null, location);
        },
        function(error){
          $scope.locationSearchInProgress = false;
-        //  $scope.location = defaultLocation;
-        //  $scope.error=error;
-        //  getWeather($scope.location);
+         $scope.error=error;
          $scope.setLocationAndGetWeather(null, defaultLocation);
        }
      )
