@@ -20,9 +20,14 @@ module.exports = function(config) {
       './node_modules/angular-mocks/angular-mocks.js',
 
       // rocketWeather module
-      './scripts/rocketWeather.js',
-      './scripts/rocketWeatherController.js',
-      './scripts/rocketWeatherController.spec.js'
+      './scripts/app/rocketWeather.js',
+      './scripts/app/rocketWeatherController.js',
+      './scripts/app/rocketWeatherController.spec.js',
+
+      // services
+      './scripts/services/externalLocationFactory.js',
+      './scripts/services/locationFactory.js',
+      './scripts/services/weatherFactory.js'
     ],
 
 
