@@ -35,10 +35,10 @@
                 <div ng-if="selectedLocation">Weather for: {{selectedLocation.name}}</div>
               </div>
               <div class="col" style="padding-right: 0px;">
-                <div class="row">
+                <form class="row" ng-submit="setLocationAndGetWeather(newLocationSearch)">
                   <input style="width: 75%;" ng-model="newLocationSearch" type="text" class="col-md-auto form-control" id="newLocation" placeholder="New Location">
                   <button style="background-color: #2A2D36; color: white;" ng-click="setLocationAndGetWeather(newLocationSearch)" type="submit" class="col-md-auto btn">Update</button>
-                </div>
+                </form>
               </div>
               <!-- <div class="col" style="padding-left: 0px;">
               </div> -->
